@@ -8,4 +8,8 @@ class Pieces
     @color = color
     @curr_pos = curr_pos
   end
+
+  def move_to(new_pos)
+    @curr_pos = new_pos
+  end
 end
