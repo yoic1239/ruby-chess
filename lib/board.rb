@@ -6,6 +6,14 @@ class ChessBoard
     @board = Array.new(8) { Array.new(8) }
   end
 
+  def at_square(position)
+    return unless position[0].between?('a', 'h') && position[1].between?('1', '8')
+
+    row_idx = 8 - position[1].to_i
+    col_idx = position[0].ord - 97
+    @board[row_idx][col_idx]
+  end
+
   # rubocop: disable Metrics/MethodLength
   def display
     puts "  ┌#{'───┬' * 7}───┐"
