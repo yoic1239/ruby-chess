@@ -20,6 +20,6 @@ class Rook < Pieces
     return unless next_move.include?(new_pos)
 
     squares = in_same_rank?(@curr_pos, new_pos) ? horizontal_line(@curr_pos) : vertical_line(@curr_pos)
-    squares.select { |square| square.between?(*[curr_pos, new_pos].sort) } - [curr_pos, new_pos]
+    squares.select { |square| square.between?(*[curr_pos, new_pos].sort) } - [new_pos]
   end
 end

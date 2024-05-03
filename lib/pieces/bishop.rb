@@ -20,6 +20,6 @@ class Bishop < Pieces
     return unless next_move.include?(new_pos)
 
     squares = in_same_left_diagonal?(@curr_pos, new_pos) ? left_diagonal_line(@curr_pos) : right_diagonal_line(@curr_pos)
-    squares.select { |square| square.between?(*[curr_pos, new_pos].sort) }.delete(new_pos)
+    squares.select { |square| square.between?(*[curr_pos, new_pos].sort) } - [new_pos]
   end
 end

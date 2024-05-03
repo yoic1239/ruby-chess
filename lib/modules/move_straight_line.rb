@@ -3,11 +3,11 @@
 # Pieces that can move in a straight line, horizontally or vertically.
 module MoveHorizontalVertical
   def horizontal_line(curr_pos)
-    ('a'..'h').map { |file| file + curr_pos[1] }.delete(curr_pos)
+    ('a'..'h').map { |file| file + curr_pos[1] } - [curr_pos]
   end
 
   def vertical_line(curr_pos)
-    ('1'..'8').map { |rank| curr_pos[0] + rank }.delete(curr_pos)
+    ('1'..'8').map { |rank| curr_pos[0] + rank } - [curr_pos]
   end
 
   def in_same_rank?(curr_pos, new_pos)
@@ -27,7 +27,7 @@ module MoveDiagonal
       adjust = curr_pos.ord - file.ord
       rank = curr_rank + adjust
       file + rank.to_s if rank.between?(1, 8)
-    end.compact.delete(curr_pos)
+    end.compact - [curr_pos]
   end
 
   def right_diagonal_line(curr_pos)
@@ -36,7 +36,7 @@ module MoveDiagonal
       adjust = curr_pos.ord - file.ord
       rank = curr_rank - adjust
       file + rank.to_s if rank.between?(1, 8)
-    end.compact.delete(curr_pos)
+    end.compact - [curr_pos]
   end
 
   def in_same_left_diagonal?(curr_pos, new_pos)

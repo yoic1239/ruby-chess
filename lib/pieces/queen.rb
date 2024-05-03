@@ -29,6 +29,6 @@ class Queen < Pieces
              right_diagonal_line(@curr_pos)
            end
 
-    line.select { |square| square.between?(*[@curr_pos, new_pos].sort) }.delete(new_pos)
+    line.select { |square| square.between?(*[@curr_pos, new_pos].sort) } - [new_pos]
   end
 end
