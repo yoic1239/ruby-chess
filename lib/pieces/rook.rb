@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './pieces'
-require_relative '../modules/straight_lines_move'
+require_relative '../modules/move_straight_line'
 
 # The rook moves in a straight line, horizontally or vertically
 class Rook < Pieces

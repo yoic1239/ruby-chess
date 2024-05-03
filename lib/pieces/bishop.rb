@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require_relative './pieces'
-require_relative '../modules/straight_lines_move'
+require_relative '../modules/move_straight_line'
 
 # The bishop moves in a straight diagonal line
 class Bishop < Pieces
-  include MoveDiagonalLine
+  include MoveDiagonal
 
   def initialize(color, curr_pos)
     super(color, curr_pos)
