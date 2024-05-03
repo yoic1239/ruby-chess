@@ -6,12 +6,24 @@ class ChessBoard
     @board = Array.new(8) { Array.new(8) }
   end
 
+  def place_piece(piece, position)
+    rank_idx, file_idx = position_to_index(position)
+    @board[rank_idx][file_idx] = piece
+  end
+
+  def position_to_index(position)
+    return unless position[0].between?('a', 'h') && position[1].between?('1', '8')
+
+    rank_idx = 8 - position[1].to_i
+    file_idx = position[0].ord - 97
+    [rank_idx, file_idx]
+  end
+
   def at_square(position)
     return unless position[0].between?('a', 'h') && position[1].between?('1', '8')
 
-    row_idx = 8 - position[1].to_i
-    col_idx = position[0].ord - 97
-    @board[row_idx][col_idx]
+    rank_idx, file_idx = position_to_index(position)
+    @board[rank_idx][file_idx]
   end
 
   # rubocop: disable Metrics/MethodLength
