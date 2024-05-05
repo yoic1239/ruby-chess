@@ -7,6 +7,7 @@ class King < Pieces
   def initialize(color, curr_pos)
     super(color, curr_pos)
     @symbol = @color == 'white' ? "\u2654" : "\u265A"
+    @moved = false
   end
 
   def next_move
@@ -18,5 +19,9 @@ class King < Pieces
       file = (curr_file + file_move).chr
       file + rank if rank.between?('1', '8') && file.between?('a', 'h')
     end.compact
+  end
+
+  def castling_move
+    @color == 'white' ? %w[c1 e1] : %w[c8 e8]
   end
 end

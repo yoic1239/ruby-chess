@@ -8,6 +8,7 @@ class Pawn < Pieces
     super(color, curr_pos)
     @symbol = @color == 'white' ? "\u2659" : "\u265F"
     @moved = false
+    @advanced_2_sqaures = false
   end
 
   def next_move

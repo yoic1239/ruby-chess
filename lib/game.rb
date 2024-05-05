@@ -12,6 +12,7 @@ class ChessGame
     @white = []
     @black = []
     @curr_player = 'white'
+    @last_move
 
     set_initial_pieces
   end

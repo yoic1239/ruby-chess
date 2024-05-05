@@ -10,6 +10,7 @@ class Rook < Pieces
   def initialize(color, curr_pos)
     super(color, curr_pos)
     @symbol = @color == 'white' ? "\u2656" : "\u265C"
+    @moved = false
   end
 
   def next_move

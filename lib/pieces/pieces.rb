@@ -12,4 +12,8 @@ class Pieces
   def move_to(new_pos)
     @curr_pos = new_pos
   end
+
+  def same_color?(piece)
+    piece.color == @color
+  end
 end
