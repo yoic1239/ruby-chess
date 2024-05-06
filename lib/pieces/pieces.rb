@@ -2,7 +2,7 @@
 
 # Pieces in the chess game
 class Pieces
-  attr_reader :symbol, :curr_pos
+  attr_reader :symbol, :curr_pos, :color
 
   def initialize(color, curr_pos)
     @color = color
