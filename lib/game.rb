@@ -3,18 +3,21 @@
 require_relative './board'
 require_relative './modules/piece_setup'
 require_relative './modules/verify_input'
+require_relative './modules/moving_rules'
+require_relative './modules/verify_movement'
 
 # A command line Chess game where two players can play against each other.
 class ChessGame
   include PieceSetup
   include VerifyInput
+  include MovingRules
+  include VerifyMovement
 
   def initialize
     @board = ChessBoard.new
     @white = []
     @black = []
     @curr_player = 'white'
-    @last_move
 
     set_initial_pieces
   end
@@ -24,6 +27,13 @@ class ChessGame
       user_input = gets.chomp.downcase.split
       return user_input if valid_input?(user_input)
     end
+  end
+
+  def move_piece(piece, new_pos)
+    @board.place_piece(nil, piece.curr_pos)
+    @board.place_piece(piece, new_pos)
+    piece.move_to(new_pos)
+    @last_move = piece
   end
 
   # rubocop: disable Metrics/MethodLength
