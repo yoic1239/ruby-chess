@@ -24,8 +24,10 @@ class ChessGame
 
   def player_input
     loop do
+      puts "Current Player: #{@curr_player.capitalize}"
+      puts "Enter the square of the piece to be moved, and which square to move to. e.g. 'a2 a3'"
       user_input = gets.chomp.downcase.split
-      return user_input if valid_input?(user_input)
+      return user_input if valid_input?(user_input) && valid_move?(user_input)
     end
   end
 
