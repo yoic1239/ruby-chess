@@ -4,6 +4,8 @@ require_relative './pieces'
 
 # The pawn moves two steps forward and one step to the side or one step forward and two steps to the side
 class Pawn < Pieces
+  attr_reader :advanced_2_sqaures
+
   def initialize(color, curr_pos)
     super(color, curr_pos)
     @symbol = @color == 'white' ? "\u2659" : "\u265F"
