@@ -5,7 +5,7 @@ module VerifyMovement
   def valid_move?(user_input)
     piece = @board.at_square(user_input[0])
     new_pos = user_input[1]
-    type_of_move(piece, new_pos) != 'Invalid'
+    type_of_move(piece, new_pos) != 'Invalid' && !will_in_check(piece, new_pos)
   end
 
   def type_of_move(piece, new_pos)
@@ -34,7 +34,7 @@ module VerifyMovement
     if piece.instance_of?(Pawn)
       valid_pawn_capture?(piece, new_pos)
     else
-      piece.castling_move.include?(new_pos)
+      valid_castling?(piece, new_pos)
     end
   end
 
@@ -46,5 +46,14 @@ module VerifyMovement
     else
       allow_en_passant?(pawn, new_pos)
     end
+  end
+
+  def valid_castling?(king, new_pos)
+    rook_pos = new_pos[0] == 'c' ? "d#{new_pos[1]}" : "f#{new_pos[1]}"
+    rook = @board.at_square(rook_pos)
+
+    return false unless rook.instance_of?(Rook)
+
+    meet_castling_conditions?(king, rook)
   end
 end
