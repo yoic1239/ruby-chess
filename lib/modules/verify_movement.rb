@@ -5,7 +5,7 @@ module VerifyMovement
   def valid_move?(user_input)
     piece = @board.at_square(user_input[0])
     new_pos = user_input[1]
-    type_of_move(piece, new_pos) != 'Invalid' && !will_in_check(piece, new_pos)
+    type_of_move(piece, new_pos) != 'Invalid' && !will_in_check?(piece, new_pos)
   end
 
   def type_of_move(piece, new_pos)

@@ -43,7 +43,7 @@ module MoveDiagonal
     left_diagonal_line(curr_pos).include?(new_pos)
   end
 
-  def in_same_right_diagonal_line?(curr_pos, new_pos)
+  def in_same_right_diagonal?(curr_pos, new_pos)
     right_diagonal_line(curr_pos).include?(new_pos)
   end
 end

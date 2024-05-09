@@ -23,9 +23,9 @@ class Queen < Pieces
              horizontal_line(@curr_pos)
            elsif in_same_file?(@curr_pos, new_pos)
              vertical_line(@curr_pos)
-           elsif in_same_left_diagonal_line?(@curr_pos, new_pos)
+           elsif in_same_left_diagonal?(@curr_pos, new_pos)
              left_diagonal_line(@curr_pos)
-           elsif in_same_right_diagonal_line?(@curr_pos, new_pos)
+           elsif in_same_right_diagonal?(@curr_pos, new_pos)
              right_diagonal_line(@curr_pos)
            end
 
