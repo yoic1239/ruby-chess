@@ -21,15 +21,19 @@ module VerifyStatus
   def can_capture?(piece, target_piece)
     return false if piece.same_color?(target_piece)
 
-    target_pos = target_piece.curr_pos
+    next_capture_move(piece).include?(target_piece.curr_pos)
+  end
 
+  def next_capture_move(piece)
     case piece
     in Rook | Bishop | Queen
-      piece.next_move.include?(target_pos) && !leap_over_others?(piece, target_pos)
+      piece.next_move.reject { |new_pos| leap_over_others?(piece, new_pos) }
     in Pawn
-      piece.capture_move.include?(target_pos)
+      piece.capture_move.select do |new_pos|
+        @board.at_square(new_pos) && !piece.same_color?(@board.at_square(new_pos))
+      end
     else
-      piece.next_move.include?(target_pos)
+      piece.next_move
     end
   end
 end
