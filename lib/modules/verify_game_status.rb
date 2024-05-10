@@ -13,9 +13,17 @@ module VerifyStatus
   end
 
   def will_in_check?(piece, new_pos)
-    copy = self.clone
-    copy.move_piece(piece, new_pos)
-    copy.in_check?(@curr_player)
+    org_pos = piece.curr_pos
+    target_piece = @board.at_square(new_pos)
+
+    @board.place_piece(nil, org_pos)
+    @board.place_piece(piece, new_pos)
+    result = in_check?(@curr_player)
+
+    @board.place_piece(piece, org_pos)
+    @board.place_piece(target_piece, new_pos)
+
+    result
   end
 
   def can_capture?(piece, target_piece)
