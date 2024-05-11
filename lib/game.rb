@@ -5,6 +5,7 @@ require_relative './modules/piece_setup'
 require_relative './modules/verify_input'
 require_relative './modules/moving_rules'
 require_relative './modules/verify_movement'
+require_relative './modules/verify_game_status'
 
 # A command line Chess game where two players can play against each other.
 class ChessGame
@@ -12,6 +13,7 @@ class ChessGame
   include VerifyInput
   include MovingRules
   include VerifyMovement
+  include VerifyStatus
 
   def initialize
     @board = ChessBoard.new
@@ -36,6 +38,21 @@ class ChessGame
     @board.place_piece(piece, new_pos)
     piece.move_to(new_pos)
     @last_move = piece
+  end
+
+  def change_player
+    @curr_player = @curr_player == 'white' ? 'black' : 'white'
+  end
+
+  def introduction
+    puts <<~HEREDOC
+      Welcome to the Chess Game!
+
+      Type the position of the piece you want to move, and then new position for the piece.
+      i.e. Type 'a2 a3' to move the piece from a2 to a3
+
+      Let's start!
+    HEREDOC
   end
 
   # rubocop: disable Metrics/MethodLength
