@@ -44,4 +44,19 @@ module VerifyStatus
       piece.next_move
     end
   end
+
+  def mate?(color)
+    in_check?(color) && no_legal_move?(color)
+  end
+
+  def no_legal_move?(color)
+    player = color == 'white' ? @white : @black
+    player.none? { |piece| can_make_legal_move?(piece) }
+  end
+
+  def can_make_legal_move?(piece)
+    available_moves = next_capture_move(piece)
+    available_moves << piece.next_move if piece.instance_of(Pawn)
+    available_moves.any? { |new_pos| !will_in_check?(piece, new_pos) }
+  end
 end
