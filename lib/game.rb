@@ -60,31 +60,24 @@ class ChessGame
   end
 
   # rubocop: disable Metrics/MethodLength
-  def print_error_message(situation)
+  # rubocop: disable Layout/LineLength
+  def print_error_message(situation, *new_pos)
     case situation
     when 'wrong format'
-      puts <<~HEREDOC
-        \e[0;31mIncorrect input format!\e[0m Correct format: \e[0;32m<Position of piece to be moved> <New position>\e[0m
-        i.e. Type '\e[0;32ma2 a3\e[0m' to move the piece from a2 to a3\e[0m
-      HEREDOC
+      puts "\e[0;31mIncorrect input format!\e[0m Correct format: \e[0;32m<Position of piece to be moved> <New position>\e[0m"
 
     when 'move wrong piece'
-      puts <<~HEREDOC
-        \e[0;31mYou are not moving your piece.\e[0m Correct format: \e[0;32m<Position of piece to be moved> <New position>\e[0m
-        i.e. Type '\e[0;32ma2 a3\e[0m' to move the piece from a2 to a3\e[0m
-      HEREDOC
+      puts "\e[0;31mYou are not moving your piece.\e[0m Correct format: \e[0;32m<Position of piece to be moved> <New position>\e[0m"
 
     when 'invalid new position'
-      puts <<~HEREDOC
-        \e[0;31mCannot move the piece to a square containing your own piece.\e[0m Correct format: \e[0;32m<Position of piece to be moved> <New position>\e[0m
-        i.e. Type '\e[0;32ma2 a3\e[0m' to move the piece from a2 to a3\e[0m
-      HEREDOC
+      puts "\e[0;31mInvalid move.\e[0m Cannot move the piece to #{new_pos.capitalize}\e[0m"
 
     when 'illegal move'
-      puts <<~HEREDOC
-        \e[0;31mIllegal move!.\e[0m The move will make you in check.
-      HEREDOC
+      puts "\e[0;31mIllegal move!.\e[0m The move will make you in check."
     end
+
+    puts 'Please try again.'
   end
   # rubocop: enable Metrics/MethodLength
+  # rubocop: enable Layout/LineLength
 end

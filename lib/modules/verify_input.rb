@@ -7,7 +7,7 @@ module VerifyInput
 
     return false unless move_self_piece?(user_input) || print_error_message('move wrong piece')
 
-    return false unless valid_new_position?(user_input) || print_error_message('invalid new position')
+    return false unless valid_new_position?(user_input) || print_error_message('invalid new position', user_input[1])
 
     true
   end
