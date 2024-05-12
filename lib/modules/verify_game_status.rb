@@ -59,4 +59,8 @@ module VerifyStatus
     available_moves << piece.next_move if piece.instance_of(Pawn)
     available_moves.any? { |new_pos| !will_in_check?(piece, new_pos) }
   end
+
+  def stalemate?(color)
+    !in_check?(color) && no_legal_move?(color)
+  end
 end
