@@ -44,6 +44,10 @@ class ChessGame
     @curr_player = @curr_player == 'white' ? 'black' : 'white'
   end
 
+  def game_over?
+    mate?(@curr_player) || stalemate?(@curr_player)
+  end
+
   def introduction
     puts <<~HEREDOC
       Welcome to the Chess Game!
