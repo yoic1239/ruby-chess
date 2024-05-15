@@ -24,6 +24,19 @@ class ChessGame
     set_initial_pieces
   end
 
+  def play
+    introduction
+    loop do
+      @board.display
+      org_pos, new_pos = player_input
+      piece = @board.at_square(org_pos)
+      move_piece(piece, new_pos)
+      change_player
+      break if game_over?
+    end
+    show_result
+  end
+
   def player_input
     loop do
       puts "Current Player: #{@curr_player.capitalize}"
@@ -59,9 +72,18 @@ class ChessGame
     HEREDOC
   end
 
+  def show_result
+    if mate?(@curr_player)
+      winner = @curr_player == 'white' ? 'Black' : 'White'
+      puts "Game over! #{winner} wins the game!"
+    else
+      puts 'Game over! Draw! You two plays a good game.'
+    end
+  end
+
   # rubocop: disable Metrics/MethodLength
   # rubocop: disable Layout/LineLength
-  def print_error_message(situation, *new_pos)
+  def print_error_message(situation, new_pos = nil)
     case situation
     when 'wrong format'
       puts "\e[0;31mIncorrect input format!\e[0m Correct format: \e[0;32m<Position of piece to be moved> <New position>\e[0m"
@@ -76,7 +98,7 @@ class ChessGame
       puts "\e[0;31mIllegal move!.\e[0m The move will make you in check."
     end
 
-    puts 'Please try again.'
+    puts "Please try again.\n"
   end
   # rubocop: enable Metrics/MethodLength
   # rubocop: enable Layout/LineLength
