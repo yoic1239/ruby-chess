@@ -50,7 +50,7 @@ module VerifyMovement
   end
 
   def valid_castling?(king, new_pos)
-    rook_pos = new_pos[0] == 'c' ? "d#{new_pos[1]}" : "f#{new_pos[1]}"
+    rook_pos = new_pos[0] == 'c' ? "a#{new_pos[1]}" : "h#{new_pos[1]}"
     rook = @board.at_square(rook_pos)
 
     return false unless rook.instance_of?(Rook)
