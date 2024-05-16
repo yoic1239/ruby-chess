@@ -11,6 +11,7 @@ class Pieces
 
   def move_to(new_pos)
     @curr_pos = new_pos
+    @moved = true if [King, Rook, Pawn].include?(self.class)
   end
 
   def same_color?(piece)

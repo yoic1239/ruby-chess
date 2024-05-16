@@ -6,6 +6,7 @@ require_relative './modules/verify_input'
 require_relative './modules/moving_rules'
 require_relative './modules/verify_movement'
 require_relative './modules/verify_game_status'
+require_relative './modules/move_pieces'
 
 # A command line Chess game where two players can play against each other.
 class ChessGame
@@ -14,6 +15,7 @@ class ChessGame
   include MovingRules
   include VerifyMovement
   include VerifyStatus
+  include MovePieces
 
   def initialize
     @board = ChessBoard.new
@@ -44,13 +46,6 @@ class ChessGame
       user_input = gets.chomp.downcase.split
       return user_input if valid_input?(user_input) && valid_move?(user_input)
     end
-  end
-
-  def move_piece(piece, new_pos)
-    @board.place_piece(nil, piece.curr_pos)
-    @board.place_piece(piece, new_pos)
-    piece.move_to(new_pos)
-    @last_move = piece
   end
 
   def change_player
