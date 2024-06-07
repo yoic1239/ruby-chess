@@ -24,6 +24,7 @@ module MovePieces
 
   def remove_captured_piece(position)
     target_piece = @board.at_square(position)
+    @board.place_piece(nil, position)
     target_piece.color == 'white' ? @white.delete(target_piece) : @black.delete(target_piece)
   end
 

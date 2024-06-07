@@ -4,7 +4,7 @@ require_relative './pieces'
 
 # The pawn moves two steps forward and one step to the side or one step forward and two steps to the side
 class Pawn < Pieces
-  attr_reader :advanced_2_sqaures
+  attr_reader :advanced_2_sqaures, :moved
 
   def initialize(color, curr_pos)
     super(color, curr_pos)
@@ -29,5 +29,9 @@ class Pawn < Pieces
       file = (@curr_pos[0].ord + file_move).chr
       file + rank if rank.between?('1', '8') && file.between?('a', 'h')
     end.compact
+  end
+
+  def advanced_move?(new_pos)
+    (new_pos[1].to_i - @curr_pos[1].to_i).abs == 2
   end
 end

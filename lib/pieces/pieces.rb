@@ -10,6 +10,7 @@ class Pieces
   end
 
   def move_to(new_pos)
+    @advanced_2_sqaures = instance_of?(Pawn) && advanced_move?(new_pos) ? true : false
     @curr_pos = new_pos
     @moved = true if [King, Rook, Pawn].include?(self.class)
   end
