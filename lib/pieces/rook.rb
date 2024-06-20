@@ -7,6 +7,8 @@ require_relative '../modules/move_straight_line'
 class Rook < Pieces
   include MoveHorizontalVertical
 
+  attr_reader :moved
+
   def initialize(color, curr_pos)
     super(color, curr_pos)
     @symbol = @color == 'white' ? "\u2656" : "\u265C"

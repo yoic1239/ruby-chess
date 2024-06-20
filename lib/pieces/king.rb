@@ -4,6 +4,8 @@ require_relative './pieces'
 
 # The king moves one square in any direction, horizontally, vertically, or diagonally.
 class King < Pieces
+  attr_reader :moved
+
   def initialize(color, curr_pos)
     super(color, curr_pos)
     @symbol = @color == 'white' ? "\u2654" : "\u265A"
