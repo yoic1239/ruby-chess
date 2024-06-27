@@ -7,6 +7,7 @@ require_relative './modules/moving_rules'
 require_relative './modules/verify_movement'
 require_relative './modules/verify_game_status'
 require_relative './modules/move_pieces'
+require_relative './modules/save_game'
 
 # A command line Chess game where two players can play against each other.
 class ChessGame
@@ -16,34 +17,51 @@ class ChessGame
   include VerifyMovement
   include VerifyStatus
   include MovePieces
+  include SaveGame
 
-  def initialize
-    @board = ChessBoard.new
+  def initialize(board = ChessBoard.new, player = 'white')
+    if incompleted_games? && to_load_saved_game?
+      load_saved_game
+    else
+      start_new_game(board, player)
+    end
+  end
+
+  def start_new_game(board, player)
+    @board = board
     @white = []
     @black = []
-    @curr_player = 'white'
+    @curr_player = player
 
     set_initial_pieces
   end
 
+  # rubocop: disable Metrics/MethodLength
   def play
     introduction
     loop do
       @board.display
       org_pos, new_pos = player_input
+
+      return if @saved
+
       piece = @board.at_square(org_pos)
       move_piece(piece, new_pos)
       change_player
       break if game_over?
     end
     show_result
+    File.delete(@load_file) if @load_file
   end
+  # rubocop: enable Metrics/MethodLength
 
   def player_input
     loop do
       puts "Current Player: #{@curr_player.capitalize}"
       puts "Enter the square of the piece to be moved, and which square to move to. e.g. 'a2 a3'"
       user_input = gets.chomp.downcase.split
+
+      save_game && return if user_input == ['save']
       return user_input if valid_input?(user_input) && valid_move?(user_input)
     end
   end
