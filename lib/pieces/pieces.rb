@@ -9,10 +9,10 @@ class Pieces
     @curr_pos = curr_pos
   end
 
-  def move_to(new_pos)
+  def move_to(new_pos, test = false)
     @advanced_2_sqaures = instance_of?(Pawn) && advanced_move?(new_pos) ? true : false
     @curr_pos = new_pos
-    @moved = true if [King, Rook, Pawn].include?(self.class)
+    @moved = true if [King, Rook, Pawn].include?(self.class) && !test
   end
 
   def same_color?(piece)

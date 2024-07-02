@@ -18,10 +18,12 @@ module VerifyStatus
 
     @board.place_piece(nil, org_pos)
     @board.place_piece(piece, new_pos)
+    piece.move_to(new_pos, true)
     result = in_check?(piece.color)
 
     @board.place_piece(piece, org_pos)
     @board.place_piece(target_piece, new_pos)
+    piece.move_to(org_pos, true)
 
     result
   end
@@ -56,7 +58,8 @@ module VerifyStatus
 
   def can_make_legal_move?(piece)
     available_moves = next_capture_move(piece)
-    available_moves << piece.next_move if piece.instance_of?(Pawn)
+    available_moves += piece.next_move if piece.instance_of?(Pawn)
+    available_moves.reject! { |pos| @board.at_square(pos) && piece.same_color?(@board.at_square(pos)) }
     available_moves.any? { |new_pos| !will_in_check?(piece, new_pos) }
   end
 
