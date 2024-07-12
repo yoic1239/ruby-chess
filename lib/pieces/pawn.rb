@@ -34,4 +34,12 @@ class Pawn < Pieces
   def advanced_move?(new_pos)
     (new_pos[1].to_i - @curr_pos[1].to_i).abs == 2
   end
+
+  def can_promote?
+    @curr_pos[1] == if @color == 'white'
+                      '8'
+                    else
+                      '1'
+                    end
+  end
 end

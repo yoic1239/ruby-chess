@@ -42,4 +42,37 @@ module MovePieces
     remove_captured_piece(enemy_pos)
     basic_move(pawn, new_pos)
   end
+
+  def promotion(pawn)
+    new_piece = create_promotion_piece(pawn, promotion_type)
+    if pawn.color == 'white'
+      @white.delete(pawn)
+      @white << new_piece
+    else
+      @black.delete(pawn)
+      @black << new_piece
+    end
+    @board.place_piece(new_piece, pawn.curr_pos)
+  end
+
+  def promotion_type
+    loop do
+      puts 'Pawn promotion! What piece would you like to promote to? (Queen / Rook / Bishop / Knight)'
+      type = gets.chomp.downcase
+      return type if %w[queen bishop knight rook].include?(type)
+    end
+  end
+
+  def create_promotion_piece(pawn, type)
+    case type
+    when 'queen'
+      Queen.new(pawn.color, pawn.curr_pos)
+    when 'bishop'
+      Bishop.new(pawn.color, pawn.curr_pos)
+    when 'knight'
+      Knight.new(pawn.color, pawn.curr_pos)
+    when 'rook'
+      Rook.new(pawn.color, pawn.curr_pos)
+    end
+  end
 end

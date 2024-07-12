@@ -47,6 +47,7 @@ class ChessGame
 
       piece = @board.at_square(org_pos)
       move_piece(piece, new_pos)
+      promotion(piece) if piece.instance_of?(Pawn) && piece.can_promote?
       change_player
       break if game_over?
     end
