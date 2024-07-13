@@ -10,7 +10,7 @@ class Queen < Pieces
 
   def initialize(color, curr_pos)
     super(color, curr_pos)
-    @symbol = @color == 'white' ? "\u2655" : "\u265B"
+    @symbol = @color == 'white' ? "\u2655" : "\e[0;35m\u265B\e[0m"
   end
 
   def next_move

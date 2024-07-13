@@ -9,7 +9,7 @@ class Bishop < Pieces
 
   def initialize(color, curr_pos)
     super(color, curr_pos)
-    @symbol = @color == 'white' ? "\u2657" : "\u265D"
+    @symbol = @color == 'white' ? "\u2657" : "\e[0;35m\u265D\e[0m"
   end
 
   def next_move

@@ -6,7 +6,7 @@ require_relative './pieces'
 class Knight < Pieces
   def initialize(color, curr_pos)
     super(color, curr_pos)
-    @symbol = @color == 'white' ? "\u2658" : "\u265E"
+    @symbol = @color == 'white' ? "\u2658" : "\e[0;35m\u265E\e[0m"
   end
 
   def next_move

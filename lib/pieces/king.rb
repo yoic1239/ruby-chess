@@ -8,7 +8,7 @@ class King < Pieces
 
   def initialize(color, curr_pos)
     super(color, curr_pos)
-    @symbol = @color == 'white' ? "\u2654" : "\u265A"
+    @symbol = @color == 'white' ? "\u2654" : "\e[0;35m\u265A\e[0m"
     @moved = false
   end
 

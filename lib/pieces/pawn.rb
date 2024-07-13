@@ -8,7 +8,7 @@ class Pawn < Pieces
 
   def initialize(color, curr_pos)
     super(color, curr_pos)
-    @symbol = @color == 'white' ? "\u2659" : "\u265F"
+    @symbol = @color == 'white' ? "\u2659" : "\e[0;35m\u265F\e[0m"
     @moved = false
     @advanced_2_sqaures = false
   end
