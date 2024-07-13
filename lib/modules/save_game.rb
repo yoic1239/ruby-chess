@@ -40,10 +40,8 @@ module SaveGame
   end
 
   def to_load_saved_game?
-    saved_games = Dir.glob('save/saved_game_*.yml')
     loop do
       puts 'You have previously saved game(s). Do you want to continue to play? (Y/N)'
-      saved_games.each { |game| puts "- #{game}" }
       load_game = gets.chomp.downcase
       next unless %w[y n].include?(load_game)
 

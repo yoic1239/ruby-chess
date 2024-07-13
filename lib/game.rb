@@ -60,6 +60,7 @@ class ChessGame
     loop do
       puts "Current Player: #{@curr_player.capitalize}"
       puts "Enter the square of the piece to be moved, and which square to move to. e.g. 'a2 a3'"
+      puts "(You can type 'save' to save the game at any time)"
       user_input = gets.chomp.downcase.split
 
       save_game && return if user_input == ['save']
